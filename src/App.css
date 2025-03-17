@@ -1,38 +1,196 @@
+/* General Styles */
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  background-color: #f5f5f7;
+  color: #1c1c1e;
+}
+
 .App {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+h1 {
   text-align: center;
+  color: #1c1c1e;
+  margin-bottom: 20px;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+/* Split Layout */
+.split-layout {
   display: flex;
-  flex-direction: column;
+  gap: 20px;
+}
+
+.todo-list {
+  flex: 1;
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.calendar-view {
+  flex: 2;
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Input Container */
+.input-container {
+  margin-bottom: 20px;
+}
+
+.input-container input,
+.input-container textarea {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 16px;
+}
+
+.input-container textarea {
+  resize: vertical;
+  height: 80px;
+}
+
+.input-container button {
+  width: 100%;
+  padding: 10px;
+  background-color: #007aff;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.input-container button:hover {
+  background-color: #0063cc;
+}
+
+/* Priority Styles */
+.priority-low {
+  color: #34c759; /* Green for Low priority */
+}
+
+.priority-medium {
+  color: #ff9500; /* Orange for Medium priority */
+}
+
+.priority-high {
+  color: #ff3b30; /* Red for High priority */
+}
+
+/* Sorting Buttons */
+.sort-buttons {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.sort-buttons button {
+  padding: 10px 20px;
+  background-color: #007aff;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.sort-buttons button:hover {
+  background-color: #0063cc;
+}
+
+/* Task List */
+.task-list {
+  list-style-type: none;
+  padding: 0;
+}
+
+.task-list li {
+  background-color: #f8f9fa;
+  padding: 15px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: space-between;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+}
+
+.task-list li.completed {
+  opacity: 0.6;
+}
+
+.task-content h3 {
+  margin: 0;
+  font-size: 18px;
+  color: #1c1c1e;
+}
+
+.task-content p {
+  margin: 5px 0 0;
+  font-size: 14px;
+  color: #666666;
+}
+
+.task-actions button {
+  margin-left: 10px;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.task-actions button:first-child {
+  background-color: #34c759;
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.task-actions button:first-child:hover {
+  background-color: #248a3d;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.task-actions button:last-child {
+  background-color: #ff3b30;
+  color: white;
+}
+
+.task-actions button:last-child:hover {
+  background-color: #cc2e25;
+}
+
+/* Calendar Styles */
+.rbc-calendar {
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.rbc-header {
+  background-color: #007aff;
+  color: white;
+  padding: 10px;
+  text-align: center;
+}
+
+.rbc-event {
+  background-color: #34c759;
+  border: none;
+  border-radius: 6px;
+  padding: 2px 5px;
+  color: white;
+}
+
+.rbc-today {
+  background-color: #f0f0f0;
 }
