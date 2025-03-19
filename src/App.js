@@ -8,6 +8,8 @@ function App() {
   const [notes, setNotes] = useState("");
   const [dueDate, setDueDate] = useState("");
   const [priority, setPriority] = useState("Medium"); // Default priority
+  const [filterStatus, setFilterStatus] = useState("All"); // Filter by status
+  const [editingTask, setEditingTask] = useState(null); // Task being edited
 
   // Function to add a new task
   const addTask = () => {
@@ -44,6 +46,40 @@ function App() {
     setTasks((prevTasks) => prevTasks.filter((task) => task.id !== id));
   };
 
+  // Function to edit a task
+  const editTask = (task) => {
+    setEditingTask(task);
+    setTitle(task.title);
+    setNotes(task.notes);
+    setDueDate(task.dueDate.slice(0, 16)); // Convert ISO date to datetime-local format
+    setPriority(task.priority);
+  };
+
+  // Function to save edited task
+  const saveEditedTask = () => {
+    if (title.trim() !== "" && dueDate.trim() !== "") {
+      const updatedTask = {
+        ...editingTask,
+        title,
+        notes,
+        dueDate: new Date(dueDate).toISOString(),
+        priority,
+      };
+      setTasks((prevTasks) =>
+        prevTasks.map((task) =>
+          task.id === updatedTask.id ? updatedTask : task
+        )
+      );
+      setEditingTask(null);
+      setTitle("");
+      setNotes("");
+      setDueDate("");
+      setPriority("Medium");
+    } else {
+      alert("Please enter a title and due date for the task.");
+    }
+  };
+
   // Function to sort tasks by priority
   const sortByPriority = () => {
     const priorityOrder = { High: 1, Medium: 2, Low: 3 };
@@ -60,6 +96,14 @@ function App() {
       [...prevTasks].sort((a, b) => new Date(a.dueDate) - new Date(b.dueDate))
     );
   };
+
+  // Filter tasks by status
+  const filteredTasks = tasks.filter((task) => {
+    if (filterStatus === "All") return true;
+    if (filterStatus === "Completed") return task.completed;
+    if (filterStatus === "Incomplete") return !task.completed;
+    return true;
+  });
 
   // Check for due tasks and trigger notifications
   useEffect(() => {
@@ -126,15 +170,27 @@ function App() {
               <option value="Medium">Medium</option>
               <option value="High">High</option>
             </select>
-            <button onClick={addTask}>Add Task</button>
+            {editingTask ? (
+              <button onClick={saveEditedTask}>Save Changes</button>
+            ) : (
+              <button onClick={addTask}>Add Task</button>
+            )}
           </div>
-          {/* Sorting Buttons */}
+          {/* Sorting and Filtering Buttons */}
           <div className="sort-buttons">
             <button onClick={sortByPriority}>Sort by Priority</button>
             <button onClick={sortByDueDate}>Sort by Due Date</button>
+            <select
+              value={filterStatus}
+              onChange={(e) => setFilterStatus(e.target.value)}
+            >
+              <option value="All">All</option>
+              <option value="Completed">Completed</option>
+              <option value="Incomplete">Incomplete</option>
+            </select>
           </div>
           <ul className="task-list">
-            {tasks.map((task) => (
+            {filteredTasks.map((task) => (
               <li key={task.id} className={task.completed ? "completed" : ""}>
                 <div className="task-content">
                   <h3>{task.title}</h3>
@@ -151,6 +207,7 @@ function App() {
                   <button onClick={() => toggleCompletion(task.id)}>
                     {task.completed ? "Undo" : "Complete"}
                   </button>
+                  <button onClick={() => editTask(task)}>Edit</button>
                   <button onClick={() => deleteTask(task.id)}>Delete</button>
                 </div>
               </li>
