@@ -1,70 +1,60 @@
-# Getting Started with Create React App
+# MySchedule
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+The motivation behind MySchedule stems from the need for better time management and organization in daily life. Many people struggle with forgetfulness, missed deadlines, and inefficient planning, which can lead to stress and decreased productivity. MySchedule aims to solve these problems by providing a simple yet effective reminders application that helps users schedule their tasks, stay on top of important events, and optimize their daily routines. It exists to enhance productivity, reduce stress, and support users in managing their time more efficiently.
 
-## Available Scripts
 
-In the project directory, you can run:
+Required Tools and Program:
+To run the task scheduling app, one will need the following tools and programs:
+Operating System: 
+Windows, macOs, or Linux
+Programming Languages:
+Backend - the backend is built with Node.js and Express
+Front End - HTML/CSS/JavaScript, with React
+Database: MongoDB
+Dependancies: Covered in the installation but includes, node.js react, express, mongoose, cors, and axios. When downloading the repository, the following will all be installed as part of the 'npm install' step.
 
-### `npm start`
+Version Control: Git
+Code Editor: VS code
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Contribution: describe the process for contributing to your project. 
+○ Do you use git flow? 
+	No.
+○ What do you name your branches? 
+	There are two branches in use, sprint1, and dataBaseConnectionWithBackendSprint1, with dataBaseConnectionWithBackendSprint1 being the most recent branch of the two.
+○ Do you use GitHub issues or another ticketing website? 
+	Possibility for using GitHub issues.
+○ Do you use pull requests? 
+	Yes when pulling from GitHub as a safety precaution.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Installation: 
 
-### `npm test`
+Our application uses react, mongodb, and node.js and express, and In order to use our application you need to follow the steps to make sure it works correctly
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+You must copy the repository in github to some folder or file that you create .
 
-### `npm run build`
+	-Create the file testingFile on your desktop
+	Ex. “cd desktop/testingfile”.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Then clone the repository FROM THE BRANCH NOT FROM MAIN as follows 
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+	“git clone -b dataBaseConnectionWithBackendSprint1 https://github.com/hvpham-yorku/mySchedule-group-3.git”.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+From there, there navigate to the repository you cloned and run/type in 
 
-### `npm run eject`
+	“cd mySchedule-group-3” and then type in 
+	“npm install”.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+Once it is finished you need to run the backend server first to load in all the tasks in the database, and then run the front end server.
+	To run the back end server, navigate to your folder and go inside the back end
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+	“cd backend”
+	Then type “node server.js”.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+From there open another terminal and navigate to the repository 
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+	“cd desktop/testingFile/mySchedule-group-3 and then type
+	“npm start”  to load on the website.
 
-## Learn More
+From there the application should appear in your browser and you are free to use it.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
