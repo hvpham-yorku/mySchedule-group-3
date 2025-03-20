@@ -111,6 +111,40 @@ function App() {
     }
   };
 
+  // Function to edit a task
+  const editTask = (task) => {
+    setEditingTask(task);
+    setTitle(task.title);
+    setNotes(task.notes);
+    setDueDate(task.dueDate.slice(0, 16)); // Convert ISO date to datetime-local format
+    setPriority(task.priority);
+  };
+
+  // Function to save edited task
+  const saveEditedTask = () => {
+    if (title.trim() !== "" && dueDate.trim() !== "") {
+      const updatedTask = {
+        ...editingTask,
+        title,
+        notes,
+        dueDate: new Date(dueDate).toISOString(),
+        priority,
+      };
+      setTasks((prevTasks) =>
+        prevTasks.map((task) =>
+          task.id === updatedTask.id ? updatedTask : task
+        )
+      );
+      setEditingTask(null);
+      setTitle("");
+      setNotes("");
+      setDueDate("");
+      setPriority("Medium");
+    } else {
+      alert("Please enter a title and due date for the task.");
+    }
+  };
+
   // Function to sort tasks by priority
   const sortByPriority = () => {
     const priorityOrder = { High: 1, Medium: 2, Low: 3 };
