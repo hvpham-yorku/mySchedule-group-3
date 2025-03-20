@@ -2,7 +2,7 @@
 
 The motivation behind MySchedule stems from the need for better time management and organization in daily life. Many people struggle with forgetfulness, missed deadlines, and inefficient planning, which can lead to stress and decreased productivity. MySchedule aims to solve these problems by providing a simple yet effective reminders application that helps users schedule their tasks, stay on top of important events, and optimize their daily routines. It exists to enhance productivity, reduce stress, and support users in managing their time more efficiently.
 
-IMPORTANT NOTE: The application only works on windows systems for some reason and it was only discovered later in the sprint 1. For some reason the back-end connection fails when not on a windows system so the application can only connect to the back end and work on WINDOWS OPERATING SYSTEMS only
+IMPORTANT NOTE: The application only works on windows systems for some reason and it was only discovered later in the sprint 1. For some reason the back-end connection fails when not on a windows system so the application can only connect to the back end and work on WINDOWS OPERATING SYSTEMS only. We will investigate the reason why and hope to fix it in the coming sprints.
 
 Required Tools and Program:
 To run the task scheduling app, one will need the following tools and programs:
