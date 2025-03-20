@@ -9,7 +9,7 @@ const localizer = momentLocalizer(moment);
 
 //getting the tasks 
 const fetchTasks = async () => {
-  const response = await fetch("http://localhost:5000/api/tasks");
+  const response = await fetch("http://localhost:6001/api/tasks");
   const data = await response.json();
   console.log(data);
 };
