@@ -2,7 +2,7 @@
 
 The motivation behind MySchedule stems from the need for better time management and organization in daily life. Many people struggle with forgetfulness, missed deadlines, and inefficient planning, which can lead to stress and decreased productivity. MySchedule aims to solve these problems by providing a simple yet effective reminders application that helps users schedule their tasks, stay on top of important events, and optimize their daily routines. It exists to enhance productivity, reduce stress, and support users in managing their time more efficiently.
 
-IMPORTANT NOTE: The application only works on windows systems for some reason and it was only discovered later in the sprint 1. For some reason the back-end connection fails when not on a windows system so the application can only connect to the back end and work on WINDOWS OPERATING SYSTEMS only. We will investigate the reason why and hope to fix it in the coming sprints.
+IMPORTANT NOTE: The local port of 5000 may be in use for non windows systems since the code was used for windows systems in mind. If the application will be run on NON-WINDOWS SYSTEMS you need to change the PORT constant in the server.js file to 6000. Also, since the application was designed for windows systems, some of the code may not work correctly. For example, you cannot add a task in our application in a non windows system but all other features work as intended.
 
 Required Tools and Program:
 To run the task scheduling app, one will need the following tools and programs:
