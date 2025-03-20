@@ -31,21 +31,23 @@ Installation:
 Our application uses react, mongodb, and node.js and express, and In order to use our application you need to follow the steps to make sure it works correctly
 
 You must copy the repository in github to some folder or file that you create .
+
 	-Create the file testingFile on your desktop
-Ex. “cd desktop/testingfile”.
+	Ex. “cd desktop/testingfile”.
 
 Then clone the repository FROM THE BRANCH NOT FROM MAIN as follows 
+
 	“git clone -b dataBaseConnectionWithBackendSprint1 https://github.com/hvpham-yorku/mySchedule-group-3.git”.
 
 From there, there navigate to the repository you cloned and run/type in 
+
 	“cd mySchedule-group-3” and then type in 
-“npm install”.
+	“npm install”.
 
 Once it is finished you need to run the backend server first to load in all the tasks in the database, and then run the front end server.
 	To run the back end server, navigate to your folder and go inside the back end
 
 	“cd mySchedule-group-3/backend”
-	
 	Then type “node server.js”.
 
 From there open another terminal and navigate to the repository 
