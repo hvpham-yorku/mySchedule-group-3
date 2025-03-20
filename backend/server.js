@@ -5,6 +5,8 @@ const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
 const app = express();
+// Start the server
+const PORT = 6001;
 
 // Middleware
 app.use(cors());
@@ -54,8 +56,7 @@ app.delete("/api/tasks/:id", async (req, res) => {
   res.status(204).send();
 });
 
-// Start the server
-const PORT = 5000;
+
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
 });
