@@ -1,9 +1,14 @@
+
+
+//There are various dependencies that the application uses and we have to import some of them here as part of the front end working as needed 
 import React, { useState, useEffect } from "react";
 import axios from "axios"; // Import axios for API calls
 import "./App.css";
 import MyCalendar from "./Calendar"; // Import the Calendar component
 
+//Constructor
 function App() {
+  //fields and values that the functions have
   const [tasks, setTasks] = useState([]);
   const [title, setTitle] = useState("");
   const [notes, setNotes] = useState("");
@@ -16,6 +21,7 @@ function App() {
   useEffect(() => {
     const fetchTasks = async () => {
       try {
+        //using the axios package to get the taskes on the backend
         const response = await axios.get("http://localhost:5000/api/tasks");
         setTasks(response.data);
       } catch (error) {
@@ -27,7 +33,10 @@ function App() {
 
   // Function to add a new task
   const addTask = async () => {
+    
     if (title.trim() !== "" && dueDate.trim() !== "") {
+
+      //a task has the following fields that also are recorded as part of the database
       const newTask = {
         title,
         notes,
@@ -36,6 +45,7 @@ function App() {
         completed: false,
       };
       try {
+        //getting the tasks from the axios through its api call to the database and then setting the tasks up
         const response = await axios.post("http://localhost:5000/api/tasks", newTask);
         setTasks((prevTasks) => [...prevTasks, response.data]);
         setTitle("");
@@ -52,7 +62,9 @@ function App() {
 
   // Function to toggle task completion
   const toggleCompletion = async (id) => {
+    
     try {
+      
       const task = tasks.find((task) => task._id === id);
       const updatedTask = { ...task, completed: !task.completed };
       await axios.put(`http://localhost:5000/api/tasks/${id}`, updatedTask);
@@ -60,6 +72,7 @@ function App() {
         prevTasks.map((task) => (task._id === id ? updatedTask : task))
       );
     } catch (error) {
+      
       console.error("Error toggling task completion:", error);
     }
   };
@@ -67,6 +80,8 @@ function App() {
   // Function to delete a task
   const deleteTask = async (id) => {
     try {
+
+      //finding the id pf the task
       await axios.delete(`http://localhost:5000/api/tasks/${id}`);
       setTasks((prevTasks) => prevTasks.filter((task) => task._id !== id));
     } catch (error) {
@@ -76,15 +91,18 @@ function App() {
 
   // Function to edit a task
   const editTask = (task) => {
+    
     setEditingTask(task);
     setTitle(task.title);
     setNotes(task.notes);
     setDueDate(task.dueDate.slice(0, 16)); // Convert ISO date to datetime-local format
     setPriority(task.priority);
+    
   };
 
   // Function to save edited task
   const saveEditedTask = async () => {
+    
     if (title.trim() !== "" && dueDate.trim() !== "") {
       const updatedTask = {
         ...editingTask,
@@ -113,6 +131,7 @@ function App() {
 
   // Function to sort tasks by priority
   const sortByPriority = () => {
+    
     const priorityOrder = { High: 1, Medium: 2, Low: 3 };
     setTasks((prevTasks) =>
       [...prevTasks].sort(
@@ -130,19 +149,24 @@ function App() {
 
   // Filter tasks by status
   const filteredTasks = tasks.filter((task) => {
+    
     if (filterStatus === "All") return true;
     if (filterStatus === "Completed") return task.completed;
     if (filterStatus === "Incomplete") return !task.completed;
     return true;
   });
 
-  // Check for due tasks and trigger notifications
+  //The following method is to be completed for the next sprint but it takes a look at play sounds for when tasks are due
+
+  /*
   useEffect(() => {
+    
     const interval = setInterval(() => {
       const now = new Date();
       tasks.forEach((task) => {
         const dueDate = new Date(task.dueDate);
         if (now >= dueDate && !task.completed) {
+          
           // Trigger notification
           if (Notification.permission === "granted") {
             new Notification(`Task Due: ${task.title}`, {
@@ -150,7 +174,7 @@ function App() {
             });
 
             // Play sound
-            const audio = new Audio("/notification.mp3"); // Path to your sound file
+            const audio = new Audio("/notification.mp3"); 
             audio.play();
           }
 
@@ -160,7 +184,7 @@ function App() {
       });
     }, 60000); // Check every minute
 
-    return () => clearInterval(interval); // Cleanup interval on unmount
+    return () => clearInterval(interval);
   }, [tasks]);
 
   // Request notification permission on component mount
@@ -170,6 +194,10 @@ function App() {
     }
   }, []);
 
+  */
+  
+  //The following is the styling that is used by the css file to format the page
+  
   return (
     <div className="App">
       <h1>MySchedule</h1>
