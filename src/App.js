@@ -1,4 +1,8 @@
-
+/*NOTE: The main files that are used and are important for application purposes is App.js and server.js, which are the bulk 
+of the logic and code that is used, the css files, packages, node modules, and any other files beyond the main two will not
+be as heavily commented since it is unneeded, irrelvant, and easy to understand without commenting. As a result, these two
+files will have the majority of the comments and docummentation needed.
+*/
 
 //There are various dependencies that the application uses and we have to import some of them here as part of the front end working as needed 
 import React, { useState, useEffect } from "react";
