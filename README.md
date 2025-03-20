@@ -18,12 +18,16 @@ Version Control: Git
 Code Editor: VS code
 
 Contribution: describe the process for contributing to your project. 
+
 ○ Do you use git flow? 
 	No.
+
 ○ What do you name your branches? 
 	There are two branches in use, sprint1, and dataBaseConnectionWithBackendSprint1, with dataBaseConnectionWithBackendSprint1 being the most recent branch of the two.
+
 ○ Do you use GitHub issues or another ticketing website? 
 	Possibility for using GitHub issues.
+
 ○ Do you use pull requests? 
 	Yes when pulling from GitHub as a safety precaution.
 
