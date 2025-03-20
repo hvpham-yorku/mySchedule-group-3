@@ -7,7 +7,7 @@ IMPORTANT NOTE: I changed the port to be 6001, in the app.js, calender.js and th
 Required Tools and Program:
 To run the task scheduling app, one will need the following tools and programs:
 Operating System: 
-Window.
+Mainly Windows, but can work on Mac and Linux taking into consideration the not at the top.
 Programming Languages:
 Backend - the backend is built with Node.js and Express
 Front End - HTML/CSS/JavaScript, with React
