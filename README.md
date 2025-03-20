@@ -1,5 +1,9 @@
 # MySchedule
 
+IMPORTANT NOTE: For sprint1, the code and the documents is on the dataBaseConnectionWithBackendSprint1 since the group was having problems with pulling and pushing the changes on main. As a result, I created a new branch "dataBaseConnectionWithBackendSprint1" to have the required documents and the code to be pushed there and this includes the read me and the git wiki pages as well. Since people also had problems pulling and pushing the code, one person pushed the code and the documents on their end to the branch. 
+
+
+
 The motivation behind MySchedule stems from the need for better time management and organization in daily life. Many people struggle with forgetfulness, missed deadlines, and inefficient planning, which can lead to stress and decreased productivity. MySchedule aims to solve these problems by providing a simple yet effective reminders application that helps users schedule their tasks, stay on top of important events, and optimize their daily routines. It exists to enhance productivity, reduce stress, and support users in managing their time more efficiently.
 
 
