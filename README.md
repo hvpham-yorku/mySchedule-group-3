@@ -47,7 +47,7 @@ From there, there navigate to the repository you cloned and run/type in
 Once it is finished you need to run the backend server first to load in all the tasks in the database, and then run the front end server.
 	To run the back end server, navigate to your folder and go inside the back end
 
-	“cd mySchedule-group-3/backend”
+	“cd backend”
 	Then type “node server.js”.
 
 From there open another terminal and navigate to the repository 
