@@ -4,15 +4,19 @@ be as heavily commented since it is unneeded, irrelvant, and easy to understand 
 files will have the majority of the comments and docummentation needed.
 */
 
-//There are various dependencies that the application uses and we have to import some of them here as part of the front end working as needed 
+// There are various dependencies that the application uses and we have to import some of them here as part of the front end working as needed 
 import React, { useState, useEffect } from "react";
 import axios from "axios"; // Import axios for API calls
 import "./App.css";
 import MyCalendar from "./Calendar"; // Import the Calendar component
 
-//Constructor
+// Define the constant port
+const API_PORT = 6001; //using the port 6001 for no errors for non windows systems
+const API_BASE_URL = `http://localhost:${API_PORT}`; // Base URL for API calls
+
+// Constructor
 function App() {
-  //fields and values that the functions have
+  // Fields and values that the functions have
   const [tasks, setTasks] = useState([]);
   const [title, setTitle] = useState("");
   const [notes, setNotes] = useState("");
@@ -25,8 +29,8 @@ function App() {
   useEffect(() => {
     const fetchTasks = async () => {
       try {
-        //using the axios package to get the taskes on the backend
-        const response = await axios.get("http://localhost:5000/api/tasks");
+        // Using the axios package to get the tasks on the backend
+        const response = await axios.get(`${API_BASE_URL}/api/tasks`);
         setTasks(response.data);
       } catch (error) {
         console.error("Error fetching tasks:", error);
@@ -37,10 +41,7 @@ function App() {
 
   // Function to add a new task
   const addTask = async () => {
-    
     if (title.trim() !== "" && dueDate.trim() !== "") {
-
-      //a task has the following fields that also are recorded as part of the database
       const newTask = {
         title,
         notes,
@@ -48,9 +49,9 @@ function App() {
         priority,
         completed: false,
       };
+
       try {
-        //getting the tasks from the axios through its api call to the database and then setting the tasks up
-        const response = await axios.post("http://localhost:5000/api/tasks", newTask);
+        const response = await axios.post(`${API_BASE_URL}/api/tasks`, newTask);
         setTasks((prevTasks) => [...prevTasks, response.data]);
         setTitle("");
         setNotes("");
@@ -66,17 +67,14 @@ function App() {
 
   // Function to toggle task completion
   const toggleCompletion = async (id) => {
-    
     try {
-      
       const task = tasks.find((task) => task._id === id);
       const updatedTask = { ...task, completed: !task.completed };
-      await axios.put(`http://localhost:5000/api/tasks/${id}`, updatedTask);
+      await axios.put(`${API_BASE_URL}/api/tasks/${id}`, updatedTask);
       setTasks((prevTasks) =>
         prevTasks.map((task) => (task._id === id ? updatedTask : task))
       );
     } catch (error) {
-      
       console.error("Error toggling task completion:", error);
     }
   };
@@ -84,9 +82,8 @@ function App() {
   // Function to delete a task
   const deleteTask = async (id) => {
     try {
-
-      //finding the id pf the task
-      await axios.delete(`http://localhost:5000/api/tasks/${id}`);
+      // Finding the id of the task
+      await axios.delete(`${API_BASE_URL}/api/tasks/${id}`);
       setTasks((prevTasks) => prevTasks.filter((task) => task._id !== id));
     } catch (error) {
       console.error("Error deleting task:", error);
@@ -95,18 +92,15 @@ function App() {
 
   // Function to edit a task
   const editTask = (task) => {
-    
     setEditingTask(task);
     setTitle(task.title);
     setNotes(task.notes);
     setDueDate(task.dueDate.slice(0, 16)); // Convert ISO date to datetime-local format
     setPriority(task.priority);
-    
   };
 
   // Function to save edited task
   const saveEditedTask = async () => {
-    
     if (title.trim() !== "" && dueDate.trim() !== "") {
       const updatedTask = {
         ...editingTask,
@@ -116,7 +110,7 @@ function App() {
         priority,
       };
       try {
-        await axios.put(`http://localhost:5000/api/tasks/${editingTask._id}`, updatedTask);
+        await axios.put(`${API_BASE_URL}/api/tasks/${editingTask._id}`, updatedTask);
         setTasks((prevTasks) =>
           prevTasks.map((task) => (task._id === updatedTask._id ? updatedTask : task))
         );
@@ -135,7 +129,6 @@ function App() {
 
   // Function to sort tasks by priority
   const sortByPriority = () => {
-    
     const priorityOrder = { High: 1, Medium: 2, Low: 3 };
     setTasks((prevTasks) =>
       [...prevTasks].sort(
@@ -153,55 +146,13 @@ function App() {
 
   // Filter tasks by status
   const filteredTasks = tasks.filter((task) => {
-    
     if (filterStatus === "All") return true;
     if (filterStatus === "Completed") return task.completed;
     if (filterStatus === "Incomplete") return !task.completed;
     return true;
   });
 
-  //The following method is to be completed for the next sprint but it takes a look at play sounds for when tasks are due
-
-  /*
-  useEffect(() => {
-    
-    const interval = setInterval(() => {
-      const now = new Date();
-      tasks.forEach((task) => {
-        const dueDate = new Date(task.dueDate);
-        if (now >= dueDate && !task.completed) {
-          
-          // Trigger notification
-          if (Notification.permission === "granted") {
-            new Notification(`Task Due: ${task.title}`, {
-              body: `It's time for: ${task.title}`,
-            });
-
-            // Play sound
-            const audio = new Audio("/notification.mp3"); 
-            audio.play();
-          }
-
-          // Mark the task as completed
-          toggleCompletion(task._id);
-        }
-      });
-    }, 60000); // Check every minute
-
-    return () => clearInterval(interval);
-  }, [tasks]);
-
-  // Request notification permission on component mount
-  useEffect(() => {
-    if (Notification.permission !== "granted") {
-      Notification.requestPermission();
-    }
-  }, []);
-
-  */
-  
-  //The following is the styling that is used by the css file to format the page
-  
+  // The following is the styling that is used by the css file to format the page
   return (
     <div className="App">
       <h1>MySchedule</h1>
