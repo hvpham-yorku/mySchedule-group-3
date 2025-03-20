@@ -5,6 +5,11 @@ import "react-big-calendar/lib/css/react-big-calendar.css";
 
 const localizer = momentLocalizer(moment);
 
+const fetchTasks = async () => {
+  const response = await fetch("http://localhost:5000/api/tasks");
+  const data = await response.json();
+  console.log(data);
+};
 const MyCalendar = ({ tasks }) => {
   const [currentDate, setCurrentDate] = useState(new Date());
   const [currentView, setCurrentView] = useState("month"); // Ensure views change
