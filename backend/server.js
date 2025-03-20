@@ -1,3 +1,6 @@
+//the following file is the backend segment of the code 
+
+//these are the following dependancies that are needed as part of the backend with the most notable one being mongoose with is used by the database mongodb
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
@@ -7,13 +10,13 @@ const app = express();
 app.use(cors());
 app.use(express.json()); // Parse JSON request bodies
 
-// Connect to MongoDB
+// the connectino to the mongodb website
 mongoose.connect("mongodb+srv://myScheduleUsername:mySchedulePassword@myschedulecluster.hoiyb.mongodb.net/?retryWrites=true&w=majority&appName=myScheduleCluster", {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
 
-// Define Task Schema
+//here is how the tasks are defined as by the database
 const taskSchema = new mongoose.Schema({
   title: String,
   notes: String,
@@ -24,21 +27,20 @@ const taskSchema = new mongoose.Schema({
 
 const Task = mongoose.model("Task", taskSchema);
 
-// API Routes
-// Get all tasks
+// we get all the tasks through the api tasks 
 app.get("/api/tasks", async (req, res) => {
   const tasks = await Task.find();
   res.json(tasks);
 });
 
-// Add a new task
+// from here we add a new task
 app.post("/api/tasks", async (req, res) => {
   const newTask = new Task(req.body);
   await newTask.save();
   res.status(201).json(newTask);
 });
 
-// Update a task
+// here is where we Update a task
 app.put("/api/tasks/:id", async (req, res) => {
   const updatedTask = await Task.findByIdAndUpdate(req.params.id, req.body, {
     new: true,
@@ -46,7 +48,7 @@ app.put("/api/tasks/:id", async (req, res) => {
   res.json(updatedTask);
 });
 
-// Delete a task
+// and so on Delete a task
 app.delete("/api/tasks/:id", async (req, res) => {
   await Task.findByIdAndDelete(req.params.id);
   res.status(204).send();
