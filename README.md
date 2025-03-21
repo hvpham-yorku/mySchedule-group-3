@@ -12,7 +12,7 @@ Programming Languages:
 Backend - the backend is built with Node.js and Express
 Front End - HTML/CSS/JavaScript, with React
 Database: MongoDB
-Dependancies: Covered in the installation but includes, node.js react, express, mongoose, cors, and axios. When downloading the repository, the following will all be installed as part of the 'npm install' step, you also need to download git in addition.
+Dependancies: Covered in the installation but includes, node.js react, express, mongoose, cors, and axios. When downloading the repository, the following will all be installed as part of the 'npm install' step. NOTE git and node.js are required downloads before the npm start so install those!
 
 Version Control: Git
 Code Editor: VS code
