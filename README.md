@@ -33,7 +33,7 @@ Contribution: describe the process for contributing to your project.
 
 Installation: 
 
-Our application uses react, mongodb, and node.js and express, and In order to use our application you need to follow the steps to make sure it works correctly
+Our application uses react, mongodb, and node.js and express, and In order to use our application you need to follow the steps to make sure it works correctly, before the installation install both git and node.js.
 
 You must copy the repository in github to some folder or file that you create .
 
