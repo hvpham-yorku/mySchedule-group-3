@@ -22,6 +22,7 @@ h1 {
 .split-layout {
   display: flex;
   gap: 20px;
+  height: calc(100vh - 150px); /* Full height minus header space */
 }
 
 .todo-list {
@@ -30,14 +31,89 @@ h1 {
   padding: 20px;
   border-radius: 12px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  overflow-y: auto;
+}
+
+/* Right Panel Layout */
+.right-panel {
+  flex: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 
 .calendar-view {
-  flex: 2;
+  flex: 1;
   background-color: #ffffff;
   padding: 20px;
   border-radius: 12px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  min-height: 60vh;
+}
+
+/* Pinned Tasks Sidebar */
+.pinned-tasks-sidebar {
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  max-height: 30vh;
+  overflow-y: auto;
+}
+
+.pinned-tasks-sidebar h3 {
+  margin-top: 0;
+  color: #1c1c1e;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.pinned-tasks-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.pinned-task {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px;
+  margin-bottom: 12px;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  border-left: 4px solid gold;
+}
+
+.pinned-task-content {
+  flex: 1;
+}
+
+.pinned-task-content h4 {
+  margin: 0 0 4px 0;
+  font-size: 16px;
+}
+
+.pinned-task-content p {
+  margin: 4px 0;
+  font-size: 14px;
+  color: #666;
+}
+
+.unpin-button {
+  background-color: #ff3b30;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.unpin-button:hover {
+  background-color: #cc2e25;
 }
 
 /* Input Container */
@@ -77,15 +153,15 @@ h1 {
 
 /* Priority Styles */
 .priority-low {
-  color: #34c759; /* Green for Low priority */
+  color: #34c759;
 }
 
 .priority-medium {
-  color: #ff9500; /* Orange for Medium priority */
+  color: #ff9500;
 }
 
 .priority-high {
-  color: #ff3b30; /* Red for High priority */
+  color: #ff3b30;
 }
 
 /* Sorting Buttons */
@@ -109,6 +185,13 @@ h1 {
   background-color: #0063cc;
 }
 
+.sort-buttons select {
+  padding: 10px;
+  border: 1px solid #e0e0e0;
+  border-radius: 6px;
+  font-size: 14px;
+}
+
 /* Task List */
 .task-list {
   list-style-type: none;
@@ -116,10 +199,10 @@ h1 {
 }
 
 .task-list li {
+  position: relative;
   background-color: #f8f9fa;
   padding: 15px;
   border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   margin-bottom: 10px;
   display: flex;
   justify-content: space-between;
@@ -128,6 +211,18 @@ h1 {
 
 .task-list li.completed {
   opacity: 0.6;
+}
+
+.task-list li.pinned {
+  border-left: 4px solid gold;
+  background-color: #fff9e6;
+}
+
+.bookmark-icon {
+  position: absolute;
+  left: 5px;
+  top: 5px;
+  font-size: 1.2em;
 }
 
 .task-content h3 {
@@ -142,8 +237,12 @@ h1 {
   color: #666666;
 }
 
+.task-actions {
+  display: flex;
+  gap: 8px;
+}
+
 .task-actions button {
-  margin-left: 10px;
   padding: 5px 10px;
   border: none;
   border-radius: 6px;
@@ -151,22 +250,28 @@ h1 {
   cursor: pointer;
 }
 
-.task-actions button:first-child {
+.task-actions button:nth-child(1) { /* Pin/Unpin button */
+  background-color: #ffcc00;
+  color: #1c1c1e;
+}
+
+.task-actions button:nth-child(2) { /* Complete/Undo button */
   background-color: #34c759;
   color: white;
 }
 
-.task-actions button:first-child:hover {
-  background-color: #248a3d;
+.task-actions button:nth-child(3) { /* Edit button */
+  background-color: #007aff;
+  color: white;
 }
 
-.task-actions button:last-child {
+.task-actions button:nth-child(4) { /* Delete button */
   background-color: #ff3b30;
   color: white;
 }
 
-.task-actions button:last-child:hover {
-  background-color: #cc2e25;
+.task-actions button:hover {
+  opacity: 0.9;
 }
 
 /* Calendar Styles */
@@ -174,6 +279,7 @@ h1 {
   background-color: white;
   border-radius: 12px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  height: 100%;
 }
 
 .rbc-header {

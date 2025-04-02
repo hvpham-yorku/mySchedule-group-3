@@ -48,6 +48,7 @@ function App() {
         dueDate: new Date(dueDate).toISOString(), // Ensure valid date format
         priority,
         completed: false,
+        pinned: false
       };
 
       try {
@@ -152,6 +153,20 @@ function App() {
     return true;
   });
 
+  // Add toggle pin function
+const togglePin = async (id) => {
+  try {
+    const task = tasks.find((task) => task._id === id);
+    const updatedTask = { ...task, pinned: !task.pinned };
+    await axios.put(`${API_BASE_URL}/api/tasks/${id}`, updatedTask);
+    setTasks((prevTasks) =>
+      prevTasks.map((task) => (task._id === id ? updatedTask : task))
+    );
+  } catch (error) {
+    console.error("Error toggling task pin:", error);
+  }
+};
+
   // The following is the styling that is used by the css file to format the page
   return (
     <div className="App">
@@ -206,35 +221,71 @@ function App() {
               <option value="Incomplete">Incomplete</option>
             </select>
           </div>
-          <ul className="task-list">
-            {filteredTasks.map((task) => (
-              <li key={task._id} className={task.completed ? "completed" : ""}>
-                <div className="task-content">
-                  <h3>{task.title}</h3>
-                  {task.notes && <p>{task.notes}</p>}
-                  <p>Due: {new Date(task.dueDate).toLocaleString()}</p>
-                  <p>
-                    Priority:{" "}
-                    <span className={`priority-${task.priority.toLowerCase()}`}>
-                      {task.priority}
-                    </span>
-                  </p>
-                </div>
-                <div className="task-actions">
-                  <button onClick={() => toggleCompletion(task._id)}>
-                    {task.completed ? "Undo" : "Complete"}
-                  </button>
-                  <button onClick={() => editTask(task)}>Edit</button>
-                  <button onClick={() => deleteTask(task._id)}>Delete</button>
-                </div>
-              </li>
-            ))}
-          </ul>
+           {/* Underneath the calender, the task list */}
+        <ul className="task-list">
+        {filteredTasks.map((task) => (
+          <li 
+            key={task._id} 
+            className={`${task.completed ? "completed" : ""} ${task.pinned ? "pinned" : ""}`}
+          >
+            {task.pinned && <span className="bookmark-icon">📌</span>}
+            <div className="task-content">
+              <h3>{task.title}</h3>
+              {task.notes && <p>{task.notes}</p>}
+              <p>Due: {new Date(task.dueDate).toLocaleString()}</p>
+              <p>
+                Priority:{" "}
+                <span className={`priority-${task.priority.toLowerCase()}`}>
+                  {task.priority}
+                </span>
+              </p>
+            </div>
+            <div className="task-actions">
+              <button onClick={() => togglePin(task._id)}>
+                {task.pinned ? "Unpin" : "Pin"}
+              </button>
+              <button onClick={() => toggleCompletion(task._id)}>
+                {task.completed ? "Undo" : "Complete"}
+              </button>
+              <button onClick={() => editTask(task)}>Edit</button>
+              <button onClick={() => deleteTask(task._id)}>Delete</button>
+            </div>
+          </li>
+        ))}
+      </ul>
         </div>
-
-        {/* Right Side: Calendar */}
-        <div className="calendar-view">
-          <MyCalendar tasks={tasks} />
+        
+         {/* Right Side: Calendar and Pinned Tasks */}
+        <div className="right-panel">
+          <div className="calendar-view">
+            <MyCalendar tasks={tasks} />
+          </div>
+          <div className="pinned-tasks-sidebar">
+            <h3>📌 Pinned Tasks</h3>
+            {tasks.filter(task => task.pinned).length > 0 ? (
+              <ul className="pinned-tasks-list">
+                {tasks.filter(task => task.pinned).map(task => (
+                  <li key={task._id} className="pinned-task">
+                    <div className="pinned-task-content">
+                      <h4>{task.title}</h4>
+                      <p>Due: {new Date(task.dueDate).toLocaleString()}</p>
+                      <p className={`priority-${task.priority.toLowerCase()}`}>
+                        {task.priority} priority
+                      </p>
+                    </div>
+                    <button 
+                      onClick={() => togglePin(task._id)}
+                      className="unpin-button"
+                    >
+                      Unpin
+                    </button>
+                  </li>
+                ))}
+              </ul>
+            ) : (
+              <p>No pinned tasks</p>
+            )}
+            </div>
         </div>
       </div>
     </div>
