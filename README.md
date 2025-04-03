@@ -2,12 +2,11 @@
 
 The motivation behind MySchedule stems from the need for better time management and organization in daily life. Many people struggle with forgetfulness, missed deadlines, and inefficient planning, which can lead to stress and decreased productivity. MySchedule aims to solve these problems by providing a simple yet effective reminders application that helps users schedule their tasks, stay on top of important events, and optimize their daily routines. It exists to enhance productivity, reduce stress, and support users in managing their time more efficiently.
 
-IMPORTANT NOTE: I changed the port to be 6001, in the app.js, calender.js and the server.js so if there are any processes running on the local port then you must change it since in the beginning, I set the port to 5000, but on non windows systems there would already be a process happening on the host. Also, since the application was designed for windows systems, some of the code may not work correctly. For example, you will have to manually type in the data for the time instead of using the calendar prompt since it does not include the time. At this point that was the only big change between the operating systems, if there are any other issues depending on the OS, they will be addressed in the next sprint.
+Updates: The app now features more advanced functionality and capabilities for its uses, including searching, pinning, reminding and progression. In addition, fixes were made to Linux and Mac systems meaning that it can run on a majority of the major OS platforms. 
 
 Required Tools and Program:
 To run the task scheduling app, one will need the following tools and programs:
-Operating System: 
-Mainly Windows, but can work on Mac and Linux taking into consideration the not at the top.
+Operating System: Windows, Mac and Linux
 Programming Languages:
 Backend - the backend is built with Node.js and Express
 Front End - HTML/CSS/JavaScript, with React
