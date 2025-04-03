@@ -24,6 +24,7 @@ function App() {
   const [priority, setPriority] = useState("Medium"); // Default priority
   const [filterStatus, setFilterStatus] = useState("All"); // Filter by status
   const [editingTask, setEditingTask] = useState(null); // Task being edited
+  const [searchQuery, setSearchQuery] = useState(""); // Search query for tasks
 
   // Fetch tasks from the backend
   useEffect(() => {
@@ -144,11 +145,32 @@ function App() {
     );
   };
 
-  // Filter tasks by status
+  // Calculate task progress statistics
+  const calculateProgress = () => {
+    const totalTasks = tasks.length;
+    const completedTasks = tasks.filter(task => task.completed).length;
+    const completionPercentage = totalTasks > 0 ? Math.round((completedTasks / totalTasks) * 100) : 0;
+    
+    return {
+      totalTasks,
+      completedTasks,
+      completionPercentage
+    };
+  };
+
+  // Filter tasks by status and search query
   const filteredTasks = tasks.filter((task) => {
-    if (filterStatus === "All") return true;
-    if (filterStatus === "Completed") return task.completed;
-    if (filterStatus === "Incomplete") return !task.completed;
+    // Filter by status
+    if (filterStatus === "Completed" && !task.completed) return false;
+    if (filterStatus === "Incomplete" && task.completed) return false;
+    
+    // Filter by search query
+    if (searchQuery && 
+        !task.title.toLowerCase().includes(searchQuery.toLowerCase()) &&
+        !task.notes.toLowerCase().includes(searchQuery.toLowerCase())) {
+      return false;
+    }
+    
     return true;
   });
 
@@ -193,7 +215,23 @@ function App() {
               <button onClick={addTask}>Add Task</button>
             )}
           </div>
-          {/* Sorting and Filtering Buttons */}
+          
+          {/* Progress Bar */}
+          <div className="progress-container">
+            <h3>Task Progress</h3>
+            <div className="progress-bar">
+              <div 
+                className="progress-fill" 
+                style={{ width: `${calculateProgress().completionPercentage}%` }}
+              ></div>
+            </div>
+            <p>
+              {calculateProgress().completedTasks} of {calculateProgress().totalTasks} tasks completed (
+              {calculateProgress().completionPercentage}%)
+            </p>
+          </div>
+          
+          {/* Sorting, Filtering and Search */}
           <div className="sort-buttons">
             <button onClick={sortByPriority}>Sort by Priority</button>
             <button onClick={sortByDueDate}>Sort by Due Date</button>
@@ -205,7 +243,15 @@ function App() {
               <option value="Completed">Completed</option>
               <option value="Incomplete">Incomplete</option>
             </select>
+            <input
+              type="text"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              placeholder="Search tasks..."
+              className="search-input"
+            />
           </div>
+          
           <ul className="task-list">
             {filteredTasks.map((task) => (
               <li key={task._id} className={task.completed ? "completed" : ""}>
