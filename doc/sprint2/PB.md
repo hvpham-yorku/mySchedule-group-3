@@ -4,3 +4,5 @@ Since sprint1, we decided as a group to not have a PB.md file since we thought i
 https://trello.com/invite/b/67c9e214bdbda5c7fb477114/ATTIa85d3a3d2cbba76d95596cc51de73ec67CD6B997/to-do-list-app
 
 Amazingly, we were able to finish all the assigned tasks for the user stories so we did not need to update the PB.md or the Trello equivalent to add more user stories for the uncompleted tasks and as a result no changes were made to the PB.md
+
+Update as of Sprint2: Similar to above the product backlog can be found on Trello and similarly to sprint1, we were able to complete all the user stories for sprint2 during the sprint and their relevant tasks so no changes were made to the PB.md or on Trello as a result.
