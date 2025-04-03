@@ -1,4 +1,4 @@
-//the following file is the backend segment of the code 
+//the following file is the backend segment of the code
 
 //these are the following dependancies that are needed as part of the backend with the most notable one being mongoose with is used by the database mongodb
 const express = require("express");
@@ -13,10 +13,13 @@ app.use(cors());
 app.use(express.json()); // Parse JSON request bodies
 
 // the connectino to the mongodb website
-mongoose.connect("mongodb+srv://myScheduleUsername:mySchedulePassword@myschedulecluster.hoiyb.mongodb.net/?retryWrites=true&w=majority&appName=myScheduleCluster", {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
+mongoose.connect(
+  "mongodb+srv://myScheduleUsername:mySchedulePassword@myschedulecluster.hoiyb.mongodb.net/?retryWrites=true&w=majority&appName=myScheduleCluster",
+  {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  }
+);
 
 //here is how the tasks are defined as by the database
 const taskSchema = new mongoose.Schema({
@@ -25,12 +28,12 @@ const taskSchema = new mongoose.Schema({
   dueDate: String,
   priority: String,
   completed: Boolean,
-  pinned: { type: Boolean, default: false }  
+  pinned: { type: Boolean, default: false },
 });
 
 const Task = mongoose.model("Task", taskSchema);
 
-// we get all the tasks through the api tasks 
+// we get all the tasks through the api tasks
 app.get("/api/tasks", async (req, res) => {
   const tasks = await Task.find();
   res.json(tasks);
@@ -56,7 +59,6 @@ app.delete("/api/tasks/:id", async (req, res) => {
   await Task.findByIdAndDelete(req.params.id);
   res.status(204).send();
 });
-
 
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);

@@ -251,22 +251,26 @@ h1 {
   cursor: pointer;
 }
 
-.task-actions button:nth-child(1) { /* Pin/Unpin button */
+.task-actions button:nth-child(1) {
+  /* Pin/Unpin button */
   background-color: #ffcc00;
   color: #1c1c1e;
 }
 
-.task-actions button:nth-child(2) { /* Complete/Undo button */
+.task-actions button:nth-child(2) {
+  /* Complete/Undo button */
   background-color: #34c759;
   color: white;
 }
 
-.task-actions button:nth-child(3) { /* Edit button */
+.task-actions button:nth-child(3) {
+  /* Edit button */
   background-color: #007aff;
   color: white;
 }
 
-.task-actions button:nth-child(4) { /* Delete button */
+.task-actions button:nth-child(4) {
+  /* Delete button */
   background-color: #ff3b30;
   color: white;
 }
