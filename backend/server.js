@@ -25,6 +25,7 @@ const taskSchema = new mongoose.Schema({
   dueDate: String,
   priority: String,
   completed: Boolean,
+  pinned: { type: Boolean, default: false }  
 });
 
 const Task = mongoose.model("Task", taskSchema);
